@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+//IMPORTING PACKAGES
+import (
+	"fmt"
+	"strings"
+)
 
 func main (){
 conferenceName := "Go Conference" 
@@ -9,7 +13,7 @@ const conferenceTickets int  = 50
 
 var remaningTickets uint = 50
 
-var bookings [50]string
+bookings := []string{} //EMPTY SLICE ASSIGMENT
 
 	fmt.Printf("conferenceTickets is %T, remaningTickets is %T, conference is %T\n", conferenceTickets,remaningTickets,conferenceName )
 
@@ -19,40 +23,49 @@ var bookings [50]string
 
 	fmt.Println("Get your tickets here to attend")
 
+	for {
+		//user data in var
+		var firstName string
+
+		var lastName string
 	
-
-	//user data in var
-  	var firstName string
-
-	var lastName string
-
-	var email string
-
-	var userTickets uint
-
-  	//ask user for their name
-	fmt.Println("Enter your first name: ")
-	fmt.Scan(&firstName)
-	//ask user for last name
-	fmt.Println("Enter your last name: ")
-	fmt.Scan(&lastName)
-	//ask user for email
-	fmt.Println("Enter your email address: ")
-	fmt.Scan(&email)
-	//asking user how many tickets they want
-	fmt.Println("How many tickets would you like?: ")
-	fmt.Scan(&userTickets)
+		var email string
 	
-	remaningTickets = remaningTickets - userTickets
-	bookings[0] = firstName + " " + lastName
+		var userTickets uint
+	
+		  //ask user for their name
+		fmt.Println("Enter your first name: ")
+		fmt.Scan(&firstName)
+		//ask user for last name
+		fmt.Println("Enter your last name: ")
+		fmt.Scan(&lastName)
+		//ask user for email
+		fmt.Println("Enter your email address: ")
+		fmt.Scan(&email)
+		//asking user how many tickets they want
+		fmt.Println("How many tickets would you like?: ")
+		fmt.Scan(&userTickets)
+		
+		remaningTickets = remaningTickets - userTickets
+		bookings = append(bookings, firstName + " " + lastName) //SLICING 
+	
+	
+		fmt.Printf("Thank you %v %v for boooking %v tickets. You will receive a confirmation email at %v\n",firstName,lastName,userTickets,email)
+		fmt.Printf("%v tickets remaining for %v\n", remaningTickets,conferenceName)
+		
+		firstNames:= []string{}
+		//this loop ends wehn iterated over all elements of the bookings list
+		for _, booking :=  range bookings{
+			var names = strings.Fields(booking)
+			firstNames = append(firstNames,names[0])
+		}
+		fmt.Printf("The first names of bookings are: %v\n",firstNames) //list of users who bought tickets 
+	}
 
-	fmt.Printf("The whole array: %v\n",bookings)
-	fmt.Printf("The first value: %v\n",bookings[0])
-	fmt.Printf("Array type: %T\n",bookings)
-	fmt.Printf("Array length: %v\n",len(bookings))
+	}
 
-	fmt.Printf("Thank you %v %v for boooking %v tickets. You will receive a confirmation email at %v\n",firstName,lastName,userTickets,email)
-	fmt.Printf("%v tickets remaining for %v\n", remaningTickets,conferenceName)
-}
+	
+ 
+	
  
 
